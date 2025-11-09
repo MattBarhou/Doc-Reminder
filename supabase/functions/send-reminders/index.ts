@@ -202,86 +202,214 @@ async function sendReminderEmail({
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>Document Expiry Reminder</title>
     </head>
-    <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background-color: #f9fafb;">
-      <div style="max-width: 600px; margin: 0 auto; padding: 20px;">
-        <div style="background: white; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); overflow: hidden;">
-          
-          <!-- Header -->
-          <div style="background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%); padding: 30px; text-align: center;">
-            <h1 style="color: white; margin: 0; font-size: 28px; font-weight: bold;">
-              🕒 DocReminder
-            </h1>
-            <p style="color: rgba(255, 255, 255, 0.9); margin: 8px 0 0 0; font-size: 16px;">
-              Document Expiry Notification
-            </p>
-          </div>
-
-          <!-- Alert Banner -->
-          <div style="background-color: ${
-            config.bgColor
-          }; border-left: 4px solid ${config.color}; padding: 16px; margin: 0;">
-            <div style="display: flex; align-items: center; gap: 8px;">
-              <span style="font-size: 24px;">${config.emoji}</span>
-              <span style="color: ${
-                config.color
-              }; font-weight: 600; font-size: 18px;">
-                ${reminderType}
-              </span>
-            </div>
-          </div>
-
-          <!-- Content -->
-          <div style="padding: 30px;">
-            <h2 style="color: #1f2937; margin: 0 0 20px 0; font-size: 24px;">
-              Your ${documentName} is expiring soon!
-            </h2>
+    <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background-color: #f8fafc;">
+      
+      <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="margin: 0; padding: 0;">
+        <tr>
+          <td style="padding: 40px 20px;">
             
-            <div style="background-color: #f9fafb; border-radius: 8px; padding: 20px; margin: 20px 0;">
-              <div style="display: grid; gap: 12px;">
-                <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid #e5e7eb;">
-                  <span style="color: #6b7280; font-weight: 500;">Document:</span>
-                  <span style="color: #1f2937; font-weight: 600;">${documentName}</span>
-                </div>
-                <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid #e5e7eb;">
-                  <span style="color: #6b7280; font-weight: 500;">Type:</span>
-                  <span style="color: #1f2937; text-transform: capitalize;">${documentType}</span>
-                </div>
-                <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid #e5e7eb;">
-                  <span style="color: #6b7280; font-weight: 500;">Expiry Date:</span>
-                  <span style="color: #dc2626; font-weight: 600;">${formattedDate}</span>
-                </div>
-                <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 0;">
-                  <span style="color: #6b7280; font-weight: 500;">Days Remaining:</span>
-                  <span style="color: ${
-                    config.color
-                  }; font-weight: 700; font-size: 18px;">${daysUntilExpiry} days</span>
-                </div>
-              </div>
-            </div>
-
-            <div style="background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%); border-radius: 8px; padding: 20px; text-align: center; margin: 25px 0;">
-              <p style="color: white; margin: 0 0 15px 0; font-size: 16px;">
-                Don't let your document expire! Take action now.
-              </p>
-              <a href="${Deno.env.get("APP_URL") || "https://your-app.com"}" 
-                 style="display: inline-block; background: white; color: #6366f1; padding: 12px 24px; border-radius: 6px; text-decoration: none; font-weight: 600; transition: all 0.2s;">
-                View My Documents
-              </a>
-            </div>
-
-            <p style="color: #6b7280; font-size: 14px; line-height: 1.5; margin: 20px 0 0 0;">
-              This is an automated reminder from DocReminder. We'll continue to send you notifications as your document expiry date approaches.
-            </p>
-          </div>
-
-          <!-- Footer -->
-          <div style="background-color: #f9fafb; padding: 20px; text-align: center; border-top: 1px solid #e5e7eb;">
-            <p style="color: #9ca3af; font-size: 12px; margin: 0;">
-              © ${new Date().getFullYear()} DocReminder. Never miss an expiry date again.
-            </p>
-          </div>
-        </div>
-      </div>
+            <!-- Main Container -->
+            <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="max-width: 600px; margin: 0 auto; background: white; border-radius: 12px; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);">
+              
+              <!-- Header -->
+              <tr>
+                <td style="padding: 40px 40px 30px; text-align: center; background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%); border-radius: 12px 12px 0 0;">
+                  <div style="width: 60px; height: 60px; background: rgba(255, 255, 255, 0.2); border-radius: 50%; margin: 0 auto 20px; display: flex; align-items: center; justify-content: center;">
+                    <span style="font-size: 28px; line-height: 1;">🕒</span>
+                  </div>
+                  <h1 style="margin: 0 0 8px; color: white; font-size: 28px; font-weight: 600; letter-spacing: -0.5px;">
+                    DocReminder
+                  </h1>
+                  <p style="margin: 0; color: rgba(255, 255, 255, 0.9); font-size: 16px;">
+                    Document Management Made Simple
+                  </p>
+                </td>
+              </tr>
+              
+              <!-- Alert Banner -->
+              <tr>
+                <td style="padding: 0; background: ${
+                  config.bgColor
+                }; border-left: 4px solid ${config.color};">
+                  <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+                    <tr>
+                      <td style="padding: 20px 40px;">
+                        <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+                          <tr>
+                            <td style="width: 50px; vertical-align: top;">
+                              <div style="width: 40px; height: 40px; background: ${
+                                config.color
+                              }; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                                <span style="font-size: 20px; line-height: 1;">${
+                                  config.emoji
+                                }</span>
+                              </div>
+                            </td>
+                            <td style="padding-left: 16px; vertical-align: top;">
+                              <h3 style="margin: 0 0 4px; color: ${
+                                config.color
+                              }; font-size: 18px; font-weight: 600;">
+                                ${reminderType}
+                              </h3>
+                              <p style="margin: 0; color: #6b7280; font-size: 14px;">
+                                Action required for your document
+                              </p>
+                            </td>
+                          </tr>
+                        </table>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+              
+              <!-- Main Content -->
+              <tr>
+                <td style="padding: 40px;">
+                  
+                  <!-- Title -->
+                  <h2 style="margin: 0 0 16px; color: #1f2937; font-size: 24px; font-weight: 600; text-align: center; line-height: 1.3;">
+                    Your ${documentName} expires soon
+                  </h2>
+                  
+                  <p style="margin: 0 0 32px; color: #6b7280; font-size: 16px; line-height: 1.5; text-align: center;">
+                    We're here to help you stay organized and never miss important deadlines.
+                  </p>
+                  
+                  <!-- Document Details Card -->
+                  <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="margin: 0 0 32px; background: #f8fafc; border-radius: 8px; border: 1px solid #e2e8f0;">
+                    <tr>
+                      <td style="padding: 24px;">
+                        
+                        <!-- Document Name -->
+                        <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="margin-bottom: 16px;">
+                          <tr>
+                            <td style="padding: 8px 0; border-bottom: 1px solid #e2e8f0;">
+                              <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+                                <tr>
+                                  <td style="color: #64748b; font-size: 14px; font-weight: 500;">Document</td>
+                                  <td style="text-align: right; color: #1e293b; font-size: 16px; font-weight: 600;">${documentName}</td>
+                                </tr>
+                              </table>
+                            </td>
+                          </tr>
+                        </table>
+                        
+                        <!-- Document Type -->
+                        <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="margin-bottom: 16px;">
+                          <tr>
+                            <td style="padding: 8px 0; border-bottom: 1px solid #e2e8f0;">
+                              <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+                                <tr>
+                                  <td style="color: #64748b; font-size: 14px; font-weight: 500;">Type</td>
+                                  <td style="text-align: right; color: #1e293b; font-size: 16px; font-weight: 500; text-transform: capitalize;">${documentType}</td>
+                                </tr>
+                              </table>
+                            </td>
+                          </tr>
+                        </table>
+                        
+                        <!-- Expiry Date -->
+                        <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="margin-bottom: 16px;">
+                          <tr>
+                            <td style="padding: 8px 0; border-bottom: 1px solid #e2e8f0;">
+                              <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+                                <tr>
+                                  <td style="color: #64748b; font-size: 14px; font-weight: 500;">Expires On</td>
+                                  <td style="text-align: right; color: #dc2626; font-size: 16px; font-weight: 600;">${formattedDate}</td>
+                                </tr>
+                              </table>
+                            </td>
+                          </tr>
+                        </table>
+                        
+                        <!-- Days Left -->
+                        <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+                          <tr>
+                            <td style="padding: 8px 0;">
+                              <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+                                <tr>
+                                  <td style="color: #64748b; font-size: 14px; font-weight: 500;">Time Remaining</td>
+                                  <td style="text-align: right;">
+                                    <span style="background: ${
+                                      config.color
+                                    }; color: white; padding: 6px 12px; border-radius: 16px; font-size: 14px; font-weight: 600;">
+                                      ${daysUntilExpiry} days
+                                    </span>
+                                  </td>
+                                </tr>
+                              </table>
+                            </td>
+                          </tr>
+                        </table>
+                        
+                      </td>
+                    </tr>
+                  </table>
+                  
+                  <!-- CTA Button -->
+                  <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="margin: 0 0 32px;">
+                    <tr>
+                      <td style="text-align: center;">
+                        <a href="${
+                          Deno.env.get("APP_URL") || "https://your-app.com"
+                        }" 
+                           style="display: inline-block; background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%); color: white; padding: 14px 28px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 16px; box-shadow: 0 2px 8px rgba(99, 102, 241, 0.3);">
+                          View My Documents
+                        </a>
+                      </td>
+                    </tr>
+                  </table>
+                  
+                  <!-- Info Box -->
+                  <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
+                    <tr>
+                      <td style="background: #eff6ff; border-left: 3px solid #3b82f6; border-radius: 4px; padding: 16px;">
+                        <p style="margin: 0; color: #1e40af; font-size: 14px; line-height: 1.5;">
+                          <strong>💡 Tip:</strong> Set up automatic renewals when possible to avoid last-minute stress.
+                        </p>
+                      </td>
+                    </tr>
+                  </table>
+                  
+                </td>
+              </tr>
+              
+              <!-- Footer -->
+              <tr>
+                <td style="padding: 32px 40px; background: #f8fafc; border-radius: 0 0 12px 12px; text-align: center; border-top: 1px solid #e2e8f0;">
+                  
+                  <!-- Unsubscribe -->
+                  <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="margin-bottom: 20px;">
+                    <tr>
+                      <td style="text-align: center;">
+                        <a href="${
+                          Deno.env.get("APP_URL") || "https://your-app.com"
+                        }/unsubscribe?email=${encodeURIComponent(to)}" 
+                           style="color: #64748b; text-decoration: none; font-size: 14px; padding: 8px 16px; border: 1px solid #cbd5e1; border-radius: 6px;">
+                          Unsubscribe
+                        </a>
+                      </td>
+                    </tr>
+                  </table>
+                  
+                  <!-- Copyright -->
+                  <p style="margin: 0 0 8px; color: #94a3b8; font-size: 12px;">
+                    © ${new Date().getFullYear()} DocReminder
+                  </p>
+                  <p style="margin: 0; color: #cbd5e1; font-size: 11px;">
+                    This email was sent to ${to}
+                  </p>
+                  
+                </td>
+              </tr>
+              
+            </table>
+            
+          </td>
+        </tr>
+      </table>
+      
     </body>
     </html>
   `;
